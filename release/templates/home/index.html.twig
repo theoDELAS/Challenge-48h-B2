@@ -9,12 +9,17 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-        {% block stylesheets %}{% endblock %}
+
+        <style>
+            html {
+                background:transparent !important;
+            }
+        </style>
     </head>
-    <body>
+    <body class="bg-image" style="background-image: url('/img/bg.jpg')">
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand" href="{{ path('home') }}">Blogdeaux</a>
+            <nav class="navbar navbar-expand-lg navbar-light">
+               <a class="navbar-brand text-light" href="{{ path('home') }}">Blogdeaux</a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                    <span class="navbar-toggler-icon"></span>
                </button>
@@ -23,14 +28,14 @@
                    <ul class="navbar-nav ml-auto">
                        {% if app.user %}
                            <li>
-                               <a href="{{ path('account_logout') }}" class="dropdown-item">Déconnexion</a>
+                               <a href="{{ path('account_logout') }}" class="dropdown-item text-light">Déconnexion</a>
                            </li>
                        {% else %}
                            <li class="nav-item">
-                               <a href="{{ path('account_register') }}" class="nav-link">S'inscrire</a>
+                               <a href="{{ path('account_register') }}" class="nav-link text-light">S'inscrire</a>
                            </li>
                            <li class="nav-item">
-                               <a href="{{ path('account_login') }}" class="nav-link">Se connecter</a>
+                               <a href="{{ path('account_login') }}" class="nav-link text-light">Se connecter</a>
                            </li>
                        {% endif %}
                    </ul>
@@ -69,7 +74,7 @@
                </div>
            {% endfor %}       
         </header>
-            <div class="home bg-image" style="background-image: url('/img/bg.jpg')">
+            <div class="home bg-image">
                 <div class="container" style="max-width: 90em; padding-top: 1.5rem;">
                     <div style="display:flex;justify-content:center;align-items:center;">
                         <div class="d-flex flex-column bd-highlight mb-3">
@@ -93,7 +98,7 @@
                                       <strong class="d-inline-block mb-2 text-primary">Social</strong>
                                       <h3 class="mb-0">Annonces</h3>
                                       <p class="card-text mb-auto">Petite annonce pouvant comporter des réduction alimentaire, de la revente entre particulier, des services et bien plus encore.</p>
-                                      <a href="{{ path('article_index', {'id': annonces.id}) }}" class="stretched-link">Voir catégorie</a>
+                                      <a href="#" class="stretched-link">Voir catégorie</a>
                                     </div>
                                   </div>
                                 </div>
@@ -104,7 +109,7 @@
                                       <strong class="d-inline-block mb-2 text-success">Divertissement</strong>
                                       <h3 class="mb-0">Histoires</h3>
                                       <p class="mb-auto">Oui.</p>
-                                      <a href="{{ path('story_index', {'id': histoire.id}) }}" class="stretched-link">Voir catégorie</a>
+                                      <a href="#" class="stretched-link">Voir catégorie</a>
                                     </div>
                                   </div>
                                 </div>
