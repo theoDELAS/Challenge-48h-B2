@@ -24,6 +24,8 @@ class ArticleController extends AbstractController
         return $this->render('articles/index.html.twig', ['articles' => $articleCategory]);
     }
 
+
+
     public function add(Request $request)
     {
         $this->denyAccessUnlessGranted('USER');
