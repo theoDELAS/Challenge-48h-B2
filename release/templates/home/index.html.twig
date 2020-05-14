@@ -93,7 +93,7 @@
                                       <strong class="d-inline-block mb-2 text-primary">Social</strong>
                                       <h3 class="mb-0">Annonces</h3>
                                       <p class="card-text mb-auto">Petite annonce pouvant comporter des réduction alimentaire, de la revente entre particulier, des services et bien plus encore.</p>
-                                      <a href="#" class="stretched-link">Voir catégorie</a>
+                                      <a href="{{ path('article_index', {'id': annonces.id}) }}" class="stretched-link">Voir catégorie</a>
                                     </div>
                                   </div>
                                 </div>
@@ -102,9 +102,9 @@
                                   <div class=" case-opening row no-gutters border rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative" style="background-color: white; height: 15em">
                                     <div class="col p-4 d-flex flex-column position-static">
                                       <strong class="d-inline-block mb-2 text-success">Divertissement</strong>
-                                      <h3 class="mb-0">Histoires</h2>
+                                      <h3 class="mb-0">Histoires</h3>
                                       <p class="mb-auto">Oui.</p>
-                                      <a href="#" class="stretched-link">Voir catégorie</a>
+                                      <a href="{{ path('story_index', {'id': histoire.id}) }}" class="stretched-link">Voir catégorie</a>
                                     </div>
                                   </div>
                                 </div>
