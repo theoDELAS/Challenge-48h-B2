@@ -7,8 +7,9 @@ use App\Entity\ArticleCategory;
 use App\Form\ArticleFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,6 +25,11 @@ class ArticleController extends AbstractController
         return $this->render('articles/index.html.twig', ['articles' => $articleCategory]);
     }
 
+    /**
+     * @Route("/annonces/article/{title}/ajouter", name="add_article")
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function add(Request $request)
     {
         $this->denyAccessUnlessGranted('USER');
@@ -69,11 +75,11 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/annonces/article/{title}/modifier)
+     * @Route("/annonces/article/{title}/modifier", name="edit_article")
      * @IsGranted("USER")
      * @param Article $article
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function edit(Article $article, Request $request)
     {
@@ -127,7 +133,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/annonces/article/{title}/cadegage", name="delete_article")
      * @param Article $article
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function remove(Article $article)
     {
