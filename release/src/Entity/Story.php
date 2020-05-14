@@ -37,12 +37,12 @@ class Story
     /**
      * @ORM\Column(type="datetime")
      */
-    private $publication_date;
+    private $publicationDate;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $last_update_date;
+    private $lastUpdateDate;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -52,11 +52,11 @@ class Story
     /**
      * @ORM\ManyToMany(targetEntity=StoryCategory::class, inversedBy="stories")
      */
-    private $category_story;
+    private $storyCategory;
 
     public function __construct()
     {
-        $this->category_story = new ArrayCollection();
+        $this->storyCategory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,24 +102,24 @@ class Story
 
     public function getPublicationDate(): ?\DateTimeInterface
     {
-        return $this->publication_date;
+        return $this->publicationDate;
     }
 
-    public function setPublicationDate(\DateTimeInterface $publication_date): self
+    public function setPublicationDate(\DateTimeInterface $publicationDate): self
     {
-        $this->publication_date = $publication_date;
+        $this->publicationDate = $publicationDate;
 
         return $this;
     }
 
     public function getLastUpdateDate(): ?\DateTimeInterface
     {
-        return $this->last_update_date;
+        return $this->lastUpdateDate;
     }
 
-    public function setLastUpdateDate(\DateTimeInterface $last_update_date): self
+    public function setLastUpdateDate(\DateTimeInterface $lastUpdateDate): self
     {
-        $this->last_update_date = $last_update_date;
+        $this->lastUpdateDate = $lastUpdateDate;
 
         return $this;
     }
@@ -139,24 +139,24 @@ class Story
     /**
      * @return Collection|StoryCategory[]
      */
-    public function getCategoryStory(): Collection
+    public function getStoryCategory(): Collection
     {
-        return $this->category_story;
+        return $this->storyCategory;
     }
 
-    public function addCategoryStory(StoryCategory $categoryStory): self
+    public function addStoryCategory(StoryCategory $storyCategory): self
     {
-        if (!$this->category_story->contains($categoryStory)) {
-            $this->category_story[] = $categoryStory;
+        if (!$this->storyCategory->contains($storyCategory)) {
+            $this->storyCategory[] = $storyCategory;
         }
 
         return $this;
     }
 
-    public function removeCategoryStory(StoryCategory $categoryStory): self
+    public function removeStoryCategory(StoryCategory $storyCategory): self
     {
-        if ($this->category_story->contains($categoryStory)) {
-            $this->category_story->removeElement($categoryStory);
+        if ($this->storyCategory->contains($storyCategory)) {
+            $this->storyCategory->removeElement($storyCategory);
         }
 
         return $this;

@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\StoryCategoryRepository;
+use App\Repository\RoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=StoryCategoryRepository::class)
+ * @ORM\Entity(repositoryClass=RoleRepository::class)
  */
-class StoryCategory
+class Role
 {
     /**
      * @ORM\Id()
@@ -25,13 +25,13 @@ class StoryCategory
     private $label;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Story::class, mappedBy="storyCategory")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="role")
      */
-    private $stories;
+    private $users;
 
     public function __construct()
     {
-        $this->stories = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,28 +52,28 @@ class StoryCategory
     }
 
     /**
-     * @return Collection|Story[]
+     * @return Collection|User[]
      */
-    public function getStories(): Collection
+    public function getUsers(): Collection
     {
-        return $this->stories;
+        return $this->users;
     }
 
-    public function addStory(Story $story): self
+    public function addUser(User $user): self
     {
-        if (!$this->stories->contains($story)) {
-            $this->stories[] = $story;
-            $story->addStoryCategory($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addRole($this);
         }
 
         return $this;
     }
 
-    public function removeStory(Story $story): self
+    public function removeUser(User $user): self
     {
-        if ($this->stories->contains($story)) {
-            $this->stories->removeElement($story);
-            $story->removeStoryCategory($this);
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeRole($this);
         }
 
         return $this;

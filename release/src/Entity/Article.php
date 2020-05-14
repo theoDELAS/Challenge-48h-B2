@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,11 +18,6 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -35,19 +28,19 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
-    private $publication_date;
+    private $picture;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $last_update_date;
+    private $publicationDate;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="datetime")
      */
-    private $is_published;
+    private $lastUpdateDate;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,30 +48,19 @@ class Article
     private $url;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="article_category")
+     * @ORM\Column(type="boolean")
      */
-    private $categories;
+    private $isPublished;
 
-    public function __construct()
-    {
-        $this->categories = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=ArticleCategory::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $articleCategory;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -105,38 +87,38 @@ class Article
         return $this;
     }
 
-    public function getPublicationDate(): ?\DateTimeInterface
+    public function getPicture(): ?string
     {
-        return $this->publication_date;
+        return $this->picture;
     }
 
-    public function setPublicationDate(\DateTimeInterface $publication_date): self
+    public function setPicture(string $picture): self
     {
-        $this->publication_date = $publication_date;
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getPublicationDate(): ?\DateTimeInterface
+    {
+        return $this->publicationDate;
+    }
+
+    public function setPublicationDate(\DateTimeInterface $publicationDate): self
+    {
+        $this->publicationDate = $publicationDate;
 
         return $this;
     }
 
     public function getLastUpdateDate(): ?\DateTimeInterface
     {
-        return $this->last_update_date;
+        return $this->lastUpdateDate;
     }
 
-    public function setLastUpdateDate(\DateTimeInterface $last_update_date): self
+    public function setLastUpdateDate(\DateTimeInterface $lastUpdateDate): self
     {
-        $this->last_update_date = $last_update_date;
-
-        return $this;
-    }
-
-    public function getIsPublished(): ?bool
-    {
-        return $this->is_published;
-    }
-
-    public function setIsPublished(bool $is_published): self
-    {
-        $this->is_published = $is_published;
+        $this->lastUpdateDate = $lastUpdateDate;
 
         return $this;
     }
@@ -153,30 +135,26 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
+    public function getIsPublished(): ?bool
     {
-        return $this->categories;
+        return $this->isPublished;
     }
 
-    public function addCategory(Category $category): self
+    public function setIsPublished(bool $isPublished): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->addArticleCategory($this);
-        }
+        $this->isPublished = $isPublished;
 
         return $this;
     }
 
-    public function removeCategory(Category $category): self
+    public function getArticleCategory(): ?ArticleCategory
     {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-            $category->removeArticleCategory($this);
-        }
+        return $this->articleCategory;
+    }
+
+    public function setArticleCategory(?ArticleCategory $articleCategory): self
+    {
+        $this->articleCategory = $articleCategory;
 
         return $this;
     }
