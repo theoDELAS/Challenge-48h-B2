@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StoryController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">{{ storyCategory.label }}</h1>
+        {% for story in storyCategory.stories %}
+            {#<div class="card mb-3">#}
+                {#<div class="card-body">#}
+                    {#<h5 class="card-title">{{ story.title }}</h5>#}
+                    {#<p class="card-text my-4">{{ story.content }}</p>#}
+                    {#<div class="row">#}
+                        {#<div class="col-md-6">#}
+                            {#<p class="card-text"><span class="text-muted">Par </span>{{ story.user.username }}</p>#}
+                        {#</div>#}
+                        {#<div class="col-md-6">#}
+                            {#<p class="card-text text-right text-muted">le {{ story.publicationDate | date('d/m/Y') }}</p>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+
+            <div class="blog-card">
+                <div class="meta">
+                    <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+                    <ul class="details">
+                        <li class="author"><i class="fas fa-user-tie"></i>  {{ story.user.username }}</li>
+                        <li class="date"><i class="fas fa-clock"></i>  le {{ story.publicationDate | date('d/m/Y') }}</li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <p>{{ story.content }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+</div>
+{% endblock %}

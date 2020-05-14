@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ path('product_index') }}">Blog'deaux</a>
+    <a class="navbar-brand" href="{{ path('home') }}">Blog'deaux</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,34 +13,23 @@
                 <a class="nav-link dropdown-toggle mr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Histoires</a>
                 <div class="dropdown-menu">
                     {% for histoire in story_category %}
-                        <a class="dropdown-item" href="{{ path('category_index', {'id': histoire.id}) }}">{{ histoire.label }}</a>
+                        <a class="dropdown-item" href="{{ path('story_index', {'id': histoire.id}) }}">{{ histoire.label }}</a>
                     {% endfor %}
                 </div>
             </li>
             <li class="nav-item dropdown mr-3">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Annonces</a>
                 <div class="dropdown-menu">
-                    {% for annonce in category %}
-                        <a class="dropdown-item" href="{{ path('platform_index', {'id': annonces.id}) }}">{{ annonces.label }}</a>
+                    {% for annonce in article_category %}
+                        <a class="dropdown-item" href="{{ path('article_index', {'id': annonce.id}) }}">{{ annonce.label }}</a>
                     {% endfor %}
                 </div>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if app.user %}
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
-                        <img src="{{ app.user.picture }}" class="avatar avatar-mini" alt="Avatar de {{ app.user.firstName }}"> {{ app.user.firstName }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
-                        <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
-                        <a href="{{ path('account_favorite') }}" class="dropdown-item">Mes favoris</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ path('account_profile') }}" class="dropdown-item">Modifier mon profil</a>
-                        <a href="{{ path('account_password') }}" class="dropdown-item">Modifier mon mot de passe</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ path('account_logout') }}" class="dropdown-item">Déconnexion</a>
-                    </div>
+                <li>
+                    <a href="{{ path('account_logout') }}" class="dropdown-item">Déconnexion</a>
                 </li>
             {% else %}
                 <li class="nav-item">
@@ -51,6 +40,28 @@
                 </li>
             {% endif %}
         </ul>
+{#        <ul class="navbar-nav ml-auto">#}
+{#            {% if app.user %}#}
+{#                <li class="nav-item dropdown">#}
+{#                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">#}
+{#                        <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>#}
+{#                        <a href="{{ path('account_favorite') }}" class="dropdown-item">Mes favoris</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a href="{{ path('account_profile') }}" class="dropdown-item">Modifier mon profil</a>#}
+{#                        <a href="{{ path('account_password') }}" class="dropdown-item">Modifier mon mot de passe</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a href="{{ path('account_logout') }}" class="dropdown-item">Déconnexion</a>#}
+{#                    </div>#}
+{#                </li>#}
+{#            {% else %}#}
+{#                <li class="nav-item">#}
+{#                    <a href="{{ path('account_register') }}" class="nav-link">S'inscrire</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a href="{{ path('account_login') }}" class="nav-link">Se connecter</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#        </ul>#}
     </div>
 </nav>
 

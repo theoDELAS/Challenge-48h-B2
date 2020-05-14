@@ -6,11 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -24,10 +25,12 @@ class User
      */
     private $email;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,9 +42,22 @@ class User
      */
     private $role;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $article;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Story::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $story;
+
     public function __construct()
     {
         $this->role = new ArrayCollection();
+        $this->userRoles = new ArrayCollection();
+        $this->article = new ArrayCollection();
+        $this->story = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,5 +125,88 @@ class User
         }
 
         return $this;
+
     }
+
+    public function getSalt() {}
+    public function eraseCredentials() {}
+
+
+    public function getRoles()
+    {
+        $roles = $this->role->map(function ($role)
+        {
+            return $role->getTitle();
+        })->toArray();
+
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticle(): Collection
+    {
+        return $this->article;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->article->contains($article)) {
+            $this->article[] = $article;
+            $article->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->article->contains($article)) {
+            $this->article->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getUser() === $this) {
+                $article->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Story[]
+     */
+    public function getStory(): Collection
+    {
+        return $this->story;
+    }
+
+    public function addStory(Story $story): self
+    {
+        if (!$this->story->contains($story)) {
+            $this->story[] = $story;
+            $story->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStory(Story $story): self
+    {
+        if ($this->story->contains($story)) {
+            $this->story->removeElement($story);
+            // set the owning side to null (unless already changed)
+            if ($story->getUser() === $this) {
+                $story->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 }
+

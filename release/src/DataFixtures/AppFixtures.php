@@ -92,6 +92,7 @@ class AppFixtures extends Fixture
                 ->setPublicationDate($faker->dateTime($max = 'now', $timezone = null))
                 ->setLastUpdateDate($faker->dateTime($max = 'now', $timezone = null))
                 ->setUrl($faker->url)
+                ->setUser($users[mt_rand(0, sizeof($users) - 1)])
             ;
             foreach ($storyCategoriesTab as $storyCategory) {
                 if (mt_rand(0,5) > 2) {
@@ -114,6 +115,7 @@ class AppFixtures extends Fixture
                 ->setUrl($faker->url)
                 ->setIsPublished(1)
                 ->setArticleCategory($articleCategoriesTab[mt_rand(0, sizeof($articleCategories) - 1)])
+                ->setUser($users[mt_rand(0, sizeof($users) - 1)])
             ;
 
             $manager->persist($article);
