@@ -31,8 +31,11 @@
                 </div>
                 <div class="description">
                     <h1>{{ article.title }}</h1>
+
+                    <p class="read-more">
+                        <a href="{{ path('article_show',{'id': article.id} ) }}">Read More  <i class="fas fa-arrow-right"></i></a>
+
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
