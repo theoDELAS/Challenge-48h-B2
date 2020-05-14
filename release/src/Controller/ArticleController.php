@@ -69,7 +69,11 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @Route("/annonces/article/{title}/modifier)
      * @IsGranted("USER")
+     * @param Article $article
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function edit(Article $article, Request $request)
     {
@@ -120,6 +124,11 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/annonces/article/{title}/cadegage", name="delete_article")
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function remove(Article $article)
     {
         $this->denyAccessUnlessGranted('USER');
