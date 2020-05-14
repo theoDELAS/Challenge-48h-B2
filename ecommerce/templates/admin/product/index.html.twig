@@ -1,0 +1,52 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Administration des jeux{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="text-center">
+            <h1 class="my-5">Gestion des jeux</h1>
+            <a href="{{ path('admin_product_create') }}" class="btn btn-outline-primary btn-block w-50 m-auto"><i class="fas fa-plus"></i></a>
+        </div>
+        <table class="table table-hover mt-4">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Plateforme</th>
+                <th class="text-center">Note</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for product in pagination.data %}
+                {% set platforms = product.platforms %}
+
+                <tr>
+                    <td class="active">{{ product.id }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>
+                        {% for platform in platforms %}
+                            {{ platform.name }}
+                            {% if not loop.last %}/{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="text-center">
+                        <span class="badge badge-primary rounded">{{ product.avgRatings | number_format(1, ',', ' ') }}</span>
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_product_edit', {'id': product.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="{{ path('admin_product_delete', {'id': product.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{#            Pagination    #}
+        {{ pagination.display() }}
+    </div>
+{% endblock %}
+

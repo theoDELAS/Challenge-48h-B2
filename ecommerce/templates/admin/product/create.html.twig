@@ -1,0 +1,57 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Création d'une annonce{% endblock %}
+
+{% form_theme form 'product/_collection.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-5">Créer une nouvelle annonce d'un jeu</h1>
+
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2>Informations générales</h2>
+                    <hr>
+                    <div class="mb-4">
+                        {{ form_widget(form.title) }}
+                    </div>
+                    <div class="mb-4">
+                        {{ form_widget(form.price) }}
+                    </div>
+                    <div class="mb-4">
+                        {{ form_widget(form.category) }}
+                    </div>
+                </div>
+                <div class="alert alert-light">
+                    <h2>Détails concernant le jeu</h2>
+                    <hr>
+                    {{ form_widget(form.description) }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2>Plateforme de jeu</h2>
+                    <hr>
+                    {{ form_widget(form.platforms) }}
+                </div>
+                <div class="alert alert-light">
+                    <h2>Image du jeu</h2>
+                    <hr>
+                    {{ form_widget(form.coverImage) }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-5">
+                    <i class="fas fa-check"></i>
+                    Créer
+                </button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/product.js"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="card shopping-cart">
+            <div class="card-header bg-dark text-light align-items-center">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Mon panier
+                <a href="{{ path('product_index') }}" class="btn btn-info pull-right float-right">Continuer mes achats</a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="card-body">
+                <!-- PRODUCT -->
+                {% if panier.product is not empty %}
+                    {% for product in panier.product %}
+                    <div class="row">
+                        <div class="col-lg-4 text-center">
+                            <img class="game-img mb-4" src="{{ product.coverImage }}" alt="prewiew">
+                        </div>
+                        <div class="col-lg-8 text-md-left">
+                            <h4 class="product-name"><strong>{{ product.title }}</strong></h4>
+                            <h4>
+                                <small>{{ product.description }}</small>
+                            </h4>
+                        </div>
+                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                            <div class="col-7 col-sm-7 col-md-8 text-md-right" style="padding-top: 5px">
+                                <h6><strong>{{ product.price }}&euro;</strong></h6>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-4 text-right">
+                                <a href="{{ path('panier_delete', {'id': product.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center">Votre panier est vide. <a href="{{ path('product_index') }}">Continuez vos achats</a></p>
+                {% endif %}
+                <!-- END PRODUCT -->
+            </div>
+            <div class="card-footer text-center">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        Total : <b>{{ panier.amount }}&euro;</b>
+                    </div>
+                    {% if panier.product is not empty %}
+                        <div class="col-md-6">
+                            <a href="{{ path('panier_validate', {'id': panier.id}) }}" class="btn btn-success">Valider mon panier</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

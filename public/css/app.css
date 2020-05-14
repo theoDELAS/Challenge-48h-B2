@@ -1,0 +1,98 @@
+.navbar {
+    height: 75px;
+    font-size: 17px;
+}
+
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-medium {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+}
+
+.avatar-mini {
+    border-radius: 50%;
+    max-width: 24px;
+    max-height: 24px;
+}
+
+.fa-star {
+    color: goldenrod;
+}
+
+.alert-success {
+    margin-top: 2em;
+}
+
+.alert-danger {
+    margin-top: 40px;
+}
+
+
+
+
+/* Gestion du panier dans la navbar (dropdown) */
+
+#dropdown-cart{
+    float:right;
+    padding-right: 30px;
+}
+
+#dropdown-cart .dropdown-menu{
+    padding:20px;
+    top:30px !important;
+    width:350px !important;
+    left:-110px !important;
+    box-shadow:0px 5px 30px black;
+}
+.total-header-section{
+    border-bottom:1px solid #d2d2d2;
+}
+.total-section p{
+    margin-bottom:20px;
+}
+.cart-detail{
+    padding:15px 0px;
+}
+.game-img {
+    width:100%;
+    max-width: 250px;
+    padding-left:15px;
+}
+.game-img-show {
+    width:100%;
+    max-width: 350px;
+    padding-left:15px;
+}
+.cart-detail-product p{
+    margin:0px;
+    color:#000;
+    font-weight:500;
+}
+.cart-detail .price{
+    font-size:12px;
+    margin-right:10px;
+    font-weight:500;
+}
+.cart-detail .count{
+    color:#C2C2DC;
+}
+.checkout{
+    border-top:1px solid #d2d2d2;
+    padding-top: 15px;
+}
+.dropdown-menu:before{
+    content: " ";
+    position:absolute;
+    top:-20px;
+    right:50px;
+    border:10px solid transparent;
+    border-bottom-color:#fff;
+}
+
