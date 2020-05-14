@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de {{ user.username }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row align-items-center mb-5">
+            <div class="col-9">
+                <h1>{{ user.username }}</h1>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-outline-primary mr-2 mb-2">
+                            <i class="fas fa-user-circle mr-2"></i>
+                            Modifier mes informations
+                        </a>
+                        <a href="#" class="btn btn-outline-primary mr-2 mb-2">
+                            <i class="fas fa-lock mr-2"></i>
+                            Modifier mon mot de passe
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
