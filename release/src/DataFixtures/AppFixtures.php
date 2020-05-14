@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Article;
 use App\Entity\ArticleCategory;
-use App\Entity\Category;
 use App\Entity\Role;
 use App\Entity\Story;
 use App\Entity\StoryCategory;

@@ -78,4 +78,9 @@ class StoryCategory
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return(string) $this->label;
+    }
 }

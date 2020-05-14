@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\StoryRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StoryRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Story
 {
@@ -65,9 +67,37 @@ class Story
         $this->storyCategory = new ArrayCollection();
     }
 
+    /**
+     * Permet de mettre en place la date de creation
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        if(empty($this->publicationDate)) {
+            $this->publicationDate = new \DateTime();
+        }
+        if(empty($this->lastUpdateDate)) {
+            $this->lastUpdateDate = new \DateTime();
+        }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * Permet d'initialiser le slug (ne pas oublier de dire a la class ... ligne 15 callbacks)
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function initializeSlug()
+    {
+        if(empty($this->url))
+        {
+            $slugify = new Slugify();
+            $this->url = $slugify->slugify($this->title);
+        }
     }
 
     public function getTitle(): ?string
