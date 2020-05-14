@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ path('product_index') }}">Nanomania</a>
+    <a class="navbar-brand" href="{{ path('product_index') }}">Blog'deaux</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,21 +10,13 @@
                 <a class="nav-link mr-3" href="{{ path('home') }}">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mr-3" href="{{ path('product_index') }}">Jeux vidéos</a>
+                <a class="nav-link mr-3" href="{{ path('product_index') }}">Les blog'deaux</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Catégories</a>
                 <div class="dropdown-menu">
                     {% for category in categories %}
                         <a class="dropdown-item" href="{{ path('category_index', {'id': category.id}) }}">{{ category.name }}</a>
-                    {% endfor %}
-                </div>
-            </li>
-            <li class="nav-item dropdown mr-3">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Plateformes</a>
-                <div class="dropdown-menu">
-                    {% for platform in platforms %}
-                        <a class="dropdown-item" href="{{ path('platform_index', {'id': platform.id}) }}">{{ platform.name }}</a>
                     {% endfor %}
                 </div>
             </li>
