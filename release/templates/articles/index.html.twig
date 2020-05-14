@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Annonces{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for article in articles.articles %}
+                <div class="col s12 m4 l3">
+                    <div class="article-card">
+                        <img src="{{ asset('images/' ~ article.picture) }}" class="responsive-img">
+                        <h2><a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a></h2>
+                        <span class="date">{{ article.PublicationDate|date('d/m/Y') }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

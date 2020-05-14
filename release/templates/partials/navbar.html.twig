@@ -21,7 +21,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Annonces</a>
                 <div class="dropdown-menu">
                     {% for annonce in article_category %}
-                        <p>{{ annonce.label }}</p>
+                        <a class="dropdown-item" href="{{ path('article_index', {'id': annonce.id}) }}">{{ annonce.label }}</a>
                     {% endfor %}
                 </div>
             </li>

@@ -4,30 +4,50 @@
 
 {% block body %}
 
-    <div class="container" style="max-width: 90em;">
-        <div class="row mb-1">
-            <div class="col-md-6">
-              <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <strong class="d-inline-block mb-2 text-primary">World</strong>
-                  <h3 class="mb-0">Featured post</h3>
-                  <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="stretched-link">Continue reading</a>
+<div class="home bg-image" style="background-image: url('/img/bg.jpg')">
+    <div class="container" style="max-width: 90em; padding-top: 1.5rem;">
+        <div style="display:flex;justify-content:center;align-items:center;">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <div class="ip-2 bd-highlight">
+                    <div class="d-flex justify-content-center">
+                        <div class="d-flex align-items-center">
+                            <div class="logo">
+                            </div>
+                            <div class="logo">
+                                <div class="d-flex col-lg-4">
+                                    <img src="/img/titre.png" alt="Titre">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="p-2 bd-highlight row mb-1">
+                    <div class="col-md-6">
+                      <div class="case-opening row no-gutters border rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative" style="background-color: white; height: 15em">
+                        <div class="col p-4 d-flex flex-column position-static">
+                          <strong class="d-inline-block mb-2 text-primary">Social</strong>
+                          <h3 class="mb-0">Annonces</h3>
+                          <p class="card-text mb-auto">Petite annonce pouvant comporter des réduction alimentaire, de la revente entre particulier, des services et bien plus encore.</p>
+                          <a href="#" class="stretched-link">Continue reading</a>
+                        </div>
+                      </div>
+                    </div>
+    
+                    <div class="col-md-6">
+                      <div class=" case-opening row no-gutters border rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative" style="background-color: white; height: 15em">
+                        <div class="col p-4 d-flex flex-column position-static">
+                          <strong class="d-inline-block mb-2 text-success">Divertissement</strong>
+                          <h3 class="mb-0">Story</h2>
+                          <p class="mb-auto">Oui.</p>
+                          <a href="#" class="stretched-link">Continue reading</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>  
             </div>
-            <div class="col-md-6">
-              <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                  <strong class="d-inline-block mb-2 text-success">Design</strong>
-                  <h3 class="mb-0">Post title</h3>
-                  <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="stretched-link">Continue reading</a>
-                </div>
-              </div>
-            </div>
-        </div>  
+        </div>
     </div>
+</div>
 
 {% endblock %}
 
