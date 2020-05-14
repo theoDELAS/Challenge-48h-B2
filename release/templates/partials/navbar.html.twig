@@ -13,7 +13,7 @@
                 <a class="nav-link dropdown-toggle mr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Histoires</a>
                 <div class="dropdown-menu">
                     {% for histoire in story_category %}
-                        <p>{{ histoire.label }}</p>
+                        <a class="dropdown-item" href="{{ path('story_index', {'id': histoire.id}) }}">{{ histoire.label }}</a>
                     {% endfor %}
                 </div>
             </li>

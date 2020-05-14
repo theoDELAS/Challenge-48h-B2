@@ -54,6 +54,12 @@ class Story
      */
     private $storyCategory;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="story")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->storyCategory = new ArrayCollection();
@@ -158,6 +164,18 @@ class Story
         if ($this->storyCategory->contains($storyCategory)) {
             $this->storyCategory->removeElement($storyCategory);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

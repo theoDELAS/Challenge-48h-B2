@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StoryController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">{{ storyCategory.label }}</h1>
+        {% for story in storyCategory.stories %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ story.title }}</h5>
+                    <p class="card-text my-4">{{ story.content }}</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text"><span class="text-muted">Par </span>{{ story.user.username }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text text-right text-muted">le {{ story.publicationDate | date('d/m/Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+</div>
+{% endblock %}
