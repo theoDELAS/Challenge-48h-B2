@@ -48,7 +48,10 @@ class StoryController extends AbstractController
                 "Votre histoire <strong>{$story->getTitle()}</strong> a bien été enregistrée"
             );
 
-            return $this->redirectToRoute('home');
+            $categoryId = $story->getStoryCategory()->getValues()[0]->getId();
+            return $this->redirectToRoute('story_index', [
+                'id' => $categoryId
+            ]);
         }
         return $this->render('/story/create.html.twig', [
             'form' => $form->createView()
