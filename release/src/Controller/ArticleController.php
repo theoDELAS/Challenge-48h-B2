@@ -25,11 +25,16 @@ class ArticleController extends AbstractController
         return $this->render('articles/index.html.twig', ['articles' => $articleCategory]);
     }
 
+<<<<<<< HEAD
     /**
      * @Route("/annonces/article/{title}/ajouter", name="add_article")
      * @param Request $request
      * @return RedirectResponse|Response
      */
+=======
+
+
+>>>>>>> 21ce2da88d6a8ba2b017c3a5483bad144f734c96
     public function add(Request $request)
     {
         $this->denyAccessUnlessGranted('USER');
