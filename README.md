@@ -19,7 +19,7 @@
 ```
 Blogdeau/
 ├── Page d'accueil 
-│    ├── Histoire
+│    ├── Histoires
 │    │    └── Page article  
 │    ├── Annonces
 │    │    └── Page article
