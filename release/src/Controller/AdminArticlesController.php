@@ -18,7 +18,7 @@ class AdminArticlesController extends AbstractController
     /**
      * @Route("/admin/articles", name="admin_articles_index")
      */
-    public function index(ArticleRepository $articles, UserRepository $users)
+    public function index(ArticleRepository $articles)
     {
         return $this->render('admin/articles/index.html.twig', [
             'articles' => $articles->findAll(),
