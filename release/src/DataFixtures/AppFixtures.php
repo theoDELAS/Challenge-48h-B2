@@ -11,12 +11,31 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
+
+        // role admin
+        $adminRole = new Role();
+        $adminRole->setLabel('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
+        $adminUser = new User();
+        $adminUser->setUsername('admin')
+                  ->setPassword($this->encoder->encodePassword($adminUser, 'password'))
+                  ->setEmail('admin@admin.com')
+                  ->addRole($adminRole)
+            ;
+        $manager->persist($adminUser);
         // Création des différentes catégories d'annonces
         $articleCategories = array(
             'Mobilier',
@@ -72,7 +91,7 @@ class AppFixtures extends Fixture
 
             $user->setEmail($faker->email)
                  ->addRole($userRole)
-                 ->setPassword('password')
+                 ->setPassword($this->encoder->encodePassword($adminUser, 'password'))
                  ->setUsername($faker->userName)
                 ;
 
