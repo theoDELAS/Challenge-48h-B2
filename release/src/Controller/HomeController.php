@@ -38,6 +38,14 @@ class HomeController extends AbstractController
         ]);
     }
 
+    public function adminNavBar()
+    {
+        return $this->render('admin/partials/navbar.html.twig', [
+            'story_category' => $this->storyCategoryRepository->findAll(),
+            'article_category' => $this->articleCategoryRepository->findAll()
+        ]);
+    }
+
     public function footer()
     {
         return $this->render('partials/footer.html.twig');
