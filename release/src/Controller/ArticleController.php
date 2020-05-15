@@ -26,15 +26,12 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/annonces/article/{title}/ajouter", name="add_article")
+     * @Route("/annonces/article/ajouter", name="article_add")
      * @param Request $request
      * @return RedirectResponse|Response
      */
-
     public function add(Request $request)
     {
-        $this->denyAccessUnlessGranted('USER');
-
         $article = new Article();
         $form = $this->createForm(ArticleFormType::class, $article);
 
@@ -42,6 +39,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setLastUpdateDate(new \DateTime());
             $article->setUrl($this->generateSlug($article->getTitle()));
+            $article->setUserId();
 
             if ($article->getPicture() !== null) {
                 $file = $form->get('picture')->getData();
@@ -49,7 +47,7 @@ class ArticleController extends AbstractController
 
                 try {
                     $file->move(
-                        $this->getParameter('/images'),
+                        $this->getParameter('kernel.project_dir').'/public/img',
                         $fileName
                     );
                 } catch (FileException $e) {

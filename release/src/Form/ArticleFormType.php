@@ -24,14 +24,15 @@ class ArticleFormType extends AbstractType
             ])
             ->add('title', TextType::class, ['required' => false])
             ->add('content', TextareaType::class, ['required' => false])
-            ->add('isPublished', CheckboxType::class, ['required' => false])
-            ->add('categories', EntityType::class, [
+            ->add('is_published', CheckboxType::class, ['required' => false])
+            ->add('ArticleCategory', EntityType::class, [
                 'class' => ArticleCategory::class,
                 'choice_label' => 'label',
-                'multiple' => true,
+                'multiple' => false,
                 'expanded' => false,
                 'required' => false
             ])
+            ->add('user_id', TextType::class, ['required' => false])
         ;
     }
 

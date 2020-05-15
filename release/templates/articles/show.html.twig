@@ -20,8 +20,16 @@
                 </p>
             </div>
         </div>
-        <div class="row">
-            <a class="button-button btn-danger" href="#">Supprimer</a>
-        </div>
+        {%  if app.user %}
+            {% if article.User.id == app.user.id %}
+                <div class="row">
+                    <ul>
+                        <li class="list-inline-item"><a class="btn btn-danger" href="#">Supprimer</a></li>
+                        <li class="list-inline-item"><a class="btn btn-warning" href="#">Modifier</a></li>
+                    </ul>
+
+                </div>
+            {% endif %}
+        {% endif %}
     </article>
 {% endblock %}

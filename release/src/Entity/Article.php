@@ -64,6 +64,9 @@ class Article
      */
     private $user;
 
+
+    private $user_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -173,6 +176,18 @@ class Article
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(int $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

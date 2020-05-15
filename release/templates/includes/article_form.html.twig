@@ -10,8 +10,8 @@
 </div>
 
 <div class="input-field col s12 m6 l6">
-    {{ form_widget(form.categories) }}
-    {{ form_label(form.categories, 'Choisissez une ou plusieurs catégories') }}
+    {{ form_widget(form.ArticleCategory) }}
+    {{ form_label(form.ArticleCategory, 'Choisissez une ou plusieurs catégories') }}
 </div>
 
 <div class="input-field col s12 m12 l12">
@@ -21,8 +21,16 @@
 <div class="input-field col s12 m12 l12">
     <p>
         <label>
-            {{ form_widget(form.isPublished, {'attr': {'class': 'filled-in'}}) }}
+            {{ form_widget(form.is_published, {'attr': {'class': 'filled-in'}}) }}
             <span>Publier</span>
+        </label>
+    </p>
+</div>
+<div hidden>
+    <p>
+        <label>
+            {{ form_widget(form.user_id, {'attr': {'value': app.User.id}}) }}
+            Crée par {{ app.User.id }}
         </label>
     </p>
 </div>
