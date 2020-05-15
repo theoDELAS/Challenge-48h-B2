@@ -31,5 +31,14 @@
                 </div>
             {% endif %}
         {% endif %}
+        <div class="row">
+
+            {% if app.user %}
+                {% if app.user.username == article.user.username %}
+                    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary btn-sm mt-2">Modifier</a>
+                    <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger btn-sm mt-2">Supprimer</a>
+                {% endif %}
+            {% endif %}
+        </div>
     </article>
 {% endblock %}

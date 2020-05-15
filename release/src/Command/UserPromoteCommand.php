@@ -28,7 +28,7 @@ class UserPromoteCommand extends Command
         $this
             ->setDescription('Promote a user by adding him a new roles.')
             ->addArgument('email', InputArgument::REQUIRED, 'Email address of the user you want to promote.')
-            ->addArgument('roles', InputArgument::REQUIRED, 'The roles you want to add to the user.')
+            ->addArgument('role', InputArgument::REQUIRED, 'The roles you want to add to the user.')
         ;
     }
 
@@ -36,14 +36,14 @@ class UserPromoteCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $email = $input->getArgument('email');
-        $roles = $input->getArgument('roles');
+        $roles = $input->getArgument('role');
 
         $userRepository = $this->om->getRepository(User::class);
         $user = $userRepository->findOneByEmail($email);
 
         if ($user) {
             if (!in_array($roles, $user->getRoles())) {
-                $user->addRoles($roles);
+                $user->$roles;
                 $this->om->flush();
             }
 

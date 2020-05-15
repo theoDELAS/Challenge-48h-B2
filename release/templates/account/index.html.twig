@@ -4,19 +4,27 @@
 
 {% block body %}
     <div class="container my-5">
-        <div class="row align-items-center mb-5">
-            <div class="col-9">
-                <h1>{{ user.username }}</h1>
-                    <div class="mt-3">
-                        <a href="#" class="btn btn-outline-primary mr-2 mb-2">
-                            <i class="fas fa-user-circle mr-2"></i>
-                            Modifier mes informations
-                        </a>
-                        <a href="#" class="btn btn-outline-primary mr-2 mb-2">
-                            <i class="fas fa-lock mr-2"></i>
-                            Modifier mon mot de passe
-                        </a>
-                    </div>
+        <div class="row align-items-center mb-5 align-items-baseline">
+            <h1 class="display-3 my-4 mb-5">Bienvenue sur votre profile {{ user.username }}</h1>
+            <div class="col-md-5 mt-5">
+                <div class="alert alert-secondary">
+                    <h2 class="alert-heading mb-3">Vos publications</h2>
+                    <h4><span class="badge badge-info">Histoires : {{ user.story | length }}</span></h4>
+                    <h4><span class="badge badge-info">Articles : {{ user.article | length }}</span></h4>
+                </div>
+
+            </div>
+            <div class="col-md-7 mt-5">
+                <div class="alert alert-secondary">
+                    <h2 class="alert-heading">Informations générales</h2>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i>
+                        Enregistrer les modifications
+                    </button>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
