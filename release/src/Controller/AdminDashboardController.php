@@ -16,12 +16,12 @@ class AdminDashboardController extends AbstractController
     public function index(EntityManagerInterface $manager)
     {
 
-
-
-
-
         return $this->render('admin/dashboard/index.html.twig', [
-
         ]);
+
+
     }
+
+
+
 }

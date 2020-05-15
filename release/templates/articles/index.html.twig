@@ -10,7 +10,7 @@
             <h1 class="my-4">{{ articles.label }}</h1>
         </div>
         <div class="align-items-center">
-            <a class="btn btn-success" href="{{ path('article_add') }}">Publier une annonce</a>
+            <a class="btn btn-success" href="{{ path('article_create') }}">Publier une annonce</a>
         </div>
     </div>
         {% for article in articles.articles %}
@@ -21,6 +21,7 @@
                         <li class="author"><i class="fas fa-user-tie"></i>  {{ article.user.username }}</li>
                         <li class="date my-3"><i class="fas fa-clock"></i>  le {{ article.publicationDate | date('d/m/Y') }}</li>
                         <li>
+
                             {% if app.user %}
                                 {% if app.user.username == article.user.username %}
                                     <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary btn-sm mt-2">Modifier</a>

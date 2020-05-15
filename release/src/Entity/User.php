@@ -101,13 +101,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Role[]
-     */
-    public function getRole(): Collection
-    {
-        return $this->role;
-    }
 
     public function addRole(Role $role): self
     {

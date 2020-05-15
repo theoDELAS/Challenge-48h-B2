@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\ArticleCategory;
-use App\Form\ArticleFormType;
+use App\Form\ArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 class ArticleController extends AbstractController
 {
@@ -28,46 +30,48 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/annonces/article/ajouter", name="article_add")
+     * @Route("/annonces/create", name="article_create")
      * @param Request $request
-     * @return RedirectResponse|Response
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
-    public function add(Request $request)
+    public function create(Request $request, EntityManagerInterface $manager)
     {
         $article = new Article();
-        $form = $this->createForm(ArticleFormType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setLastUpdateDate(new \DateTime());
+            $article->setPublicationDate(new \DateTime());
+
             $article->setUrl($this->generateSlug($article->getTitle()));
-            $article->setUserId();
+            $article->setUser($this->getUser());
+
+
+
 
             if ($article->getPicture() !== null) {
                 $file = $form->get('picture')->getData();
-                $fileName = uniqid() . '.' . $file->guessExtension();
 
-                try {
-                    $file->move(
-                        $this->getParameter('kernel.project_dir').'/public/img',
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    return new Response($e->getMessage());
-                }
-
-                $article->setPicture($fileName);
             }
 
             if ($article->getIsPublished()) {
                 $article->setPublicationDate(new \DateTime());
             }
+            $manager->persist($article);
+            $manager->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
-            $em->flush();
+            $this->addFlash(
+                'success',
+                "Votre annonces <strong>{$article->getTitle()}</strong> à bien été enregsitrée "
+            );
 
-            return $this->redirectToRoute('home');
+            $categoryId = $article->getArticleCategory()->getId();
+
+            return $this->redirectToRoute('article_index', [
+                'id' => $categoryId
+            ]);
         }
 
         return $this->render('articles/add.html.twig', [
@@ -76,13 +80,9 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/annonces/article/{title}/modifier", name="edit_article")
-     * @IsGranted("USER")
-     * @param Article $article
-     * @param Request $request
-     * @return RedirectResponse|Response
+     * @Route("/article/{id}/edit", name="article_edit")
      */
-    public function edit(Article $article, Request $request)
+    public function edit(Article $article, Request $request, EntityManagerInterface $manager)
     {
         $oldPicture = $article->getPicture();
 
@@ -132,19 +132,24 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/annonces/article/{title}/cadegage", name="delete_article")
-     * @param Article $article
-     * @return RedirectResponse
+     * @Route("/article/{id}/delete", name="article_delete")
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
-    public function remove(Article $article)
+    public function delete(Article $article, EntityManagerInterface $manager, Request $request)
     {
-        $this->denyAccessUnlessGranted('USER');
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($article);
-        $em->flush();
+        $manager->remove($article);
+        $manager->flush();
 
-        return $this->redirectToRoute('home');
+        $this->addFlash(
+            'success',
+            "Votre Annonce <strong>{$article->getTitle()}</strong> a bien été supprimée"
+        );
+
+        $request->getSession();
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 
     /**
