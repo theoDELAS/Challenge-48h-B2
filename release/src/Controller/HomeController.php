@@ -23,8 +23,10 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'story_category' => $this->storyCategoryRepository->findAll(),
+            'article_category' => $this->articleCategoryRepository->findAll()
         ]);
     }
 

@@ -7,13 +7,11 @@
 
     <div class="row my-4">
         <div class="col-md-6">
-            <h1 class="">{{ articles.label }}</h1>
+            <h1 class="my-4">{{ articles.label }}</h1>
         </div>
-
     </div>
-
         {% for article in articles.articles %}
-            <div class="blog-card">
+            <div class="blog-card mb-4">
                 <div class="meta">
                     <div class="photo" style="background-image: url({{ asset('images/' ~ article.picture) }})"></div>
                     <ul class="details">
@@ -34,9 +32,9 @@
 
                     <p class="read-more">
                         <a href="{{ path('article_show',{'id': article.id} ) }}">Read More  <i class="fas fa-arrow-right"></i></a>
-
+                    </p>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
