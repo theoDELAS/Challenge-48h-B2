@@ -9,7 +9,7 @@
     - HTML
     - CSS
     - Php
-    - Javascriptt
+    - Javascript
 - Base de données :
     - MySql
     - phpMyAdmin
