@@ -1,10 +1,5 @@
 # Challenge-48h-B2
 
-Steven Dias
-Thépo Delas
-Lous Maury
-Simon Laborde
-
 [Trello](https://trello.com/b/zPx8i97A/challenge-48h)
 
 ## Techologies utilisées :
