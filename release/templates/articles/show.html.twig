@@ -3,42 +3,36 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-    <article class="container">
-        <div class="row">
-            <div class="col s12 m12 l8 offset-l2">
-                <h2>{{ article.title }}</h2>
-                <span>{{ article.PublicationDate|date('d/m/Y') }}</span>
-                <p>
-                    <img src="{{ asset('images/' ~ article.picture) }}" class="responsive-img">
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12 m12 l8 offset-l2">
-                <p>
-                    {{ article.content }}
-                </p>
-            </div>
-        </div>
+
+
+<div class="container" style="padding-top: 1.5rem;">
+  <div class="container-product">
+    <div class="row mb-2">
+      <div class="col-md-12">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col-auto d-none d-lg-block">
+            <img src="{{ article.picture }}" alt="">
+          </div>
+          <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">{{ article.title }}</h3>
+            <div class="mb-1 text-muted">{{ article.PublicationDate|date('d/m/Y') }}</div>
+            <p class="card-text mb-auto" style="padding-top: 0.5rem">{{ article.content }}</p>
         {%  if app.user %}
             {% if article.User.id == app.user.id %}
                 <div class="row">
                     <ul>
-                        <li class="list-inline-item"><a class="btn btn-danger" href="#">Supprimer</a></li>
-                        <li class="list-inline-item"><a class="btn btn-warning" href="#">Modifier</a></li>
+                        <li class="list-inline-item"><a class="btn btn-danger" href="{{ path('article_delete', {'id': article.id}) }}">Supprimer</a></li>
+                        <li class="list-inline-item"><a class="btn btn-warning" href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></li>
                     </ul>
 
                 </div>
             {% endif %}
-        {% endif %}
-        <div class="row">
-
-            {% if app.user %}
-                {% if app.user.username == article.user.username %}
-                    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary btn-sm mt-2">Modifier</a>
-                    <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger btn-sm mt-2">Supprimer</a>
-                {% endif %}
-            {% endif %}
+        {% endif %}          
+            </div>
+          </div>
         </div>
-    </article>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
