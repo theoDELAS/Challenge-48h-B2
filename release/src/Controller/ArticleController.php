@@ -86,7 +86,7 @@ class ArticleController extends AbstractController
     {
         $oldPicture = $article->getPicture();
 
-        $form = $this->createForm(ArticleFormType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
