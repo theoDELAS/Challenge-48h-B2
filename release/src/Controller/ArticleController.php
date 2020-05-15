@@ -22,6 +22,8 @@ class ArticleController extends AbstractController
      */
     public function index(ArticleCategory $articleCategory)
     {
+
+
         return $this->render('articles/index.html.twig', ['articles' => $articleCategory]);
     }
 
