@@ -10,7 +10,9 @@
             <h1 class="my-4">{{ articles.label }}</h1>
         </div>
         <div class="align-items-center">
-            <a class="btn btn-success" href="{{ path('article_create') }}">Publier une annonce</a>
+            {% if app.user %}
+                <a class="btn btn-success" href="{{ path('article_create') }}">Publier une annonce</a>
+            {% endif %}
         </div>
     </div>
         {% for article in articles.articles %}
@@ -35,9 +37,7 @@
                     <h1>{{ article.title }}</h1>
                     {% set qwerty = article.getContent()|split(' ', 11) %} 
                         <p>
-                        {% for i in 0..9 %}
-                           {{qwerty[i] }}
-                        {% endfor %}
+                            {{ article.content | slice(0, 55) }} ...
                         </p>
                         <p class="read-more">
                         <a href="{{ path('article_show',{'id': article.id} ) }}">Read More  <i class="fas fa-arrow-right"></i></a>

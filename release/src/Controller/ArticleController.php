@@ -24,8 +24,6 @@ class ArticleController extends AbstractController
      */
     public function index(ArticleCategory $articleCategory)
     {
-
-
         return $this->render('articles/index.html.twig', ['articles' => $articleCategory]);
     }
 
@@ -48,12 +46,8 @@ class ArticleController extends AbstractController
             $article->setUrl($this->generateSlug($article->getTitle()));
             $article->setUser($this->getUser());
 
-
-
-
             if ($article->getPicture() !== null) {
                 $file = $form->get('picture')->getData();
-
             }
 
             if ($article->getIsPublished()) {
@@ -122,7 +116,9 @@ class ArticleController extends AbstractController
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('article_show', [
+                'id' => $article->getId()
+            ]);
         }
 
         return $this->render('articles/edit.html.twig', [
@@ -138,6 +134,7 @@ class ArticleController extends AbstractController
      */
     public function delete(Article $article, EntityManagerInterface $manager, Request $request)
     {
+        $articleCategory = $article->getArticleCategory()->getId();
 
         $manager->remove($article);
         $manager->flush();
@@ -147,9 +144,9 @@ class ArticleController extends AbstractController
             "Votre Annonce <strong>{$article->getTitle()}</strong> a bien été supprimée"
         );
 
-        $request->getSession();
-        $referer = $request->headers->get('referer');
-        return $this->redirect($referer);
+        return $this->redirectToRoute('article_index', [
+            'id' => $articleCategory
+        ]);
     }
 
     /**
