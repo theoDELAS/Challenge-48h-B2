@@ -123,9 +123,7 @@
                                                 {% for story in story_category %}
                                                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                                                             <a href="{{ path('story_index', {'id': story.id}) }}">
-                                                                <div class="carouselImg">
-                                                                    <img src="/public/img/electromenager.jpg" alt="...">
-                                                                </div>
+                                                                <div class="carouselImg"></div>
                                                             </a>
                                                             <div class="carousel-caption d-none d-md-block  text-dark">
                                                                 <h5>{{ story.label }}</h5>
