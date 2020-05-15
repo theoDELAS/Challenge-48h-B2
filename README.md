@@ -48,4 +48,9 @@ Page d'annonce/histoire :
  * Possibilité de modifier/supprimer annonce ou histoire faite par l'utilisateur
  
  
- ## Membres 
+ ## Membres du projet 
+ 
+ - Théo Delas
+ - Steven Dias
+ - Simon Laborde
+ - Louis Maury
