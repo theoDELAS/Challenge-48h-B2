@@ -17,7 +17,7 @@
 ## Architecture du site
 
 ```
-Blodeau/
+Blogdeau/
 ├── Page d'accueil 
 │    ├── Histoire
 │    │    └── Page article  
@@ -41,7 +41,6 @@ Page d'accueil :
 Page d'annonce/histoire : 
  * Présentation des articles 
  * Possibilité de modifier/supprimer annonce ou histoire faite par l'utilisateur
- 
  
  ## Membres du projet 
  
