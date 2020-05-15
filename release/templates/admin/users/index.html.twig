@@ -1,0 +1,37 @@
+{% extends "/admin/base.html.twig" %}
+
+{% block title %}Admin. | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <h1 class="my-5 text-center">Gestion des utilisateurs</h1>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Pseudo</th>
+                <th>Email</th>
+                <th>Annonces en lignes</th>
+                <th>Histoires en ligne</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username | capitalize }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.article | length }}</td>
+                    <td>{{ user.story | length }}</td>
+                    <td>
+                        <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="{{ path('admin_user_delete', {'id': user.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

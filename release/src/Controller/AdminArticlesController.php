@@ -22,7 +22,6 @@ class AdminArticlesController extends AbstractController
     {
         return $this->render('admin/articles/index.html.twig', [
             'articles' => $articles->findAll(),
-            'users' => $users->findAll()
         ]);
     }
 
